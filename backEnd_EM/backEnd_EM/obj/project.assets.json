@@ -3364,11 +3364,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/colinlanclos/Desktop/backEnd_EM/backEnd_EM/backEnd_EM.csproj",
+      "projectUniqueName": "/Users/colinlanclos/Documents/GitHub/EMbackEnd/backEnd_EM/backEnd_EM/backEnd_EM.csproj",
       "projectName": "backEnd_EM",
-      "projectPath": "/Users/colinlanclos/Desktop/backEnd_EM/backEnd_EM/backEnd_EM.csproj",
+      "projectPath": "/Users/colinlanclos/Documents/GitHub/EMbackEnd/backEnd_EM/backEnd_EM/backEnd_EM.csproj",
       "packagesPath": "/Users/colinlanclos/.nuget/packages/",
-      "outputPath": "/Users/colinlanclos/Desktop/backEnd_EM/backEnd_EM/obj/",
+      "outputPath": "/Users/colinlanclos/Documents/GitHub/EMbackEnd/backEnd_EM/backEnd_EM/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/colinlanclos/.nuget/NuGet/NuGet.Config"

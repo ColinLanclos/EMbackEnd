@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jgV0qnPiT1YuH4jV1JoHSzYvIRPWRX+ijPngQcgI5fd4PpbmVVgkP6TuqV8D8YUKvydzD4kt+4wIoZ0pSNfeMA==",
+  "dgSpecHash": "cFQSaB3OCkGfY6kgYX4hElrq8NgErxpCINYzKcykzAqJePT26b9JbTZ+6nyJ7Qa/YAB7JSA/WLpjXpXu3Pfapw==",
   "success": true,
-  "projectFilePath": "/Users/colinlanclos/Desktop/backEnd_EM/backEnd_EM/backEnd_EM.csproj",
+  "projectFilePath": "/Users/colinlanclos/Documents/GitHub/EMbackEnd/backEnd_EM/backEnd_EM/backEnd_EM.csproj",
   "expectedPackageFiles": [
     "/Users/colinlanclos/.nuget/packages/bouncycastle.cryptography/2.2.1/bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "/Users/colinlanclos/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
