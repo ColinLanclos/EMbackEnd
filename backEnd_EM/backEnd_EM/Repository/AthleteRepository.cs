@@ -184,6 +184,7 @@ namespace backEnd_EM.Repository
             {
                 Text = $"<b>{randomNumber}</b>"
             };
+
             using (var smtp = new SmtpClient())
             {
                 smtp.Connect("smtp.gmail.com", 587, false);

@@ -4,6 +4,7 @@ using backEnd_EM.Properties.Models;
 using backEnd_EM.Models;
 using backEnd_EM.Mapper;
 using backEnd_EM.Dtos.Analyse;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace backEnd_EM.Controllers
@@ -26,7 +27,7 @@ namespace backEnd_EM.Controllers
             _athleteRepo = athleteRepo;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [ProducesResponseType(200, Type = typeof(ICollection<Analyse>))]
         public async Task<IActionResult> GetAnalyse()
         {
@@ -40,7 +41,7 @@ namespace backEnd_EM.Controllers
             return Ok(AnalysesDto);
         }
 
-        [HttpGet("id/{id}")]
+        [HttpGet("id/{id}"), Authorize]
         public async Task<IActionResult> GetByAthleteId([FromRoute] int id)
         {
             var Analyses = await _analyseRepo.GetAnalysesByAthleteId(id);
@@ -53,7 +54,7 @@ namespace backEnd_EM.Controllers
             return Ok(Analyses);
         }
 
-        [HttpGet("phone/{phone}")]
+        [HttpGet("phone/{phone}"), Authorize]
         public async Task<IActionResult> GetAthleteByPhone([FromRoute] long phone)
         {
             var AthletesId = await _athleteRepo.GetAthletesByPhoneForId(phone);
@@ -73,7 +74,7 @@ namespace backEnd_EM.Controllers
             return Ok(Analyses);
         }
 
-        [HttpPost("makeAnalyseByPhone/{phone}")]
+        [HttpPost("makeAnalyseByPhone/{phone}"), Authorize]
         public async Task<IActionResult> MakeAnalyseByPhone([FromRoute] long phone, CreateAnalyseDto analyseDto)
         {
 
@@ -89,7 +90,7 @@ namespace backEnd_EM.Controllers
             await _analyseRepo.CreateAnalyse(analyseModel);
             return CreatedAtAction(nameof(GetByAthleteId), new { id = analyseModel }, analyseModel.ToAnalyseDto());
         }
-        [HttpGet("listOfDays/{phone}")]
+        [HttpGet("listOfDays/{phone}"), Authorize]
         public async Task<IActionResult> GetListOfDaysPerClient([FromRoute] long phone)
         {
             var AthletesId = await _athleteRepo.GetAthletesByPhoneForId(phone);
@@ -111,7 +112,7 @@ namespace backEnd_EM.Controllers
             return Ok(DayListDto);
         }
 
-        [HttpDelete("deleteAnalyseByPhone/{phone}/{day}")]
+        [HttpDelete("deleteAnalyseByPhone/{phone}/{day}"), Authorize]
         public async Task<IActionResult> DeleteAnalyseByPhone([FromRoute] long phone, [FromRoute] string day)
         {
             var AthletesId = await _athleteRepo.GetAthletesByPhoneForId(phone);
@@ -130,7 +131,7 @@ namespace backEnd_EM.Controllers
             return Ok(AnalyseModel);
         }
 
-        [HttpPut("updateAnalyse/{phone}/{day}")]
+        [HttpPut("updateAnalyse/{phone}/{day}"), Authorize]
         public async Task<IActionResult> UpdateAnalyse([FromRoute] long phone, [FromRoute] string day, [FromBody] AnalyseUpdateDto analyseUpdateDto)
         {
             var AthletesId = await _athleteRepo.GetAthletesByPhoneForId(phone);

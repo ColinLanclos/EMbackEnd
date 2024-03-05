@@ -8,6 +8,7 @@ using backEnd_EM.Dtos.Athletes;
 using backEnd_EM.Dtos;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Bcpg.OpenPgp;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace backEnd_EM.Controllers
@@ -40,7 +41,7 @@ namespace backEnd_EM.Controllers
         }
 
         [HttpGet]
-        [Route("GetGuardianById/{id}")]
+        [Route("GetGuardianById/{id}"), Authorize]
         public async Task<IActionResult> GetGuardianById([FromRoute] int id)
         {
             var Guardian = await _guardianRepo.GetGuardianById(id);
@@ -68,7 +69,7 @@ namespace backEnd_EM.Controllers
         }
 
         [HttpGet]
-        [Route("GetGuardiansByAthleteId/{athleteId}")]
+        [Route("GetGuardiansByAthleteId/{athleteId}"), Authorize]
         public async Task<IActionResult> GetGuardiansByAthleteId([FromRoute] int athleteId)
         {
             var guardian = await _guardianRepo.GetGuardiansByAthleteId(athleteId);
@@ -81,7 +82,7 @@ namespace backEnd_EM.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetGuardianByAthletePhone/{phone}")]
         public async Task<IActionResult> GetGuardianByAthletePhone([FromRoute] long phone)
         {
@@ -99,7 +100,7 @@ namespace backEnd_EM.Controllers
             return Ok(guardian);
         }
 
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("UpdateGuardianInfo/{athleteId}/{phone}")]
         public async Task<IActionResult> UpdateGuardianInfo([FromRoute] int athleteId, [FromRoute] long phone, [FromBody] UpdateGuardianDto guardianDto)
         {

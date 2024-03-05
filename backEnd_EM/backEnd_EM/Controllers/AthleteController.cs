@@ -57,7 +57,7 @@ namespace backEnd_EM.Controllers
         }
 
         //Display Athlete Basic infor for parents,Player, or coach at the time 
-        [HttpGet("byId/{id}")]
+        [HttpGet("byId/{id}"), Authorize]
         public IActionResult GetAthletesById([FromRoute] int id)
         {
             var Athletes = _context.Athletes.Find(id);
@@ -70,7 +70,7 @@ namespace backEnd_EM.Controllers
         }
 
         //returns athlete's id by phone number 
-        [HttpGet("phone/{phone}")]
+        [HttpGet("phone/{phone}"), Authorize]
         public async Task<IActionResult> GetAthletesByPhone([FromRoute] long phone)
         {
             var AthletesId = await _athleteRepository.GetAthletesByPhoneForId(phone);
@@ -90,7 +90,7 @@ namespace backEnd_EM.Controllers
         }
 
         //returnsList of Athletes and numbers
-        [HttpGet("listAthletes")]
+        [HttpGet("listAthletes"), Authorize]
         public async Task<IActionResult> GetListOfAthletes()
         {
             var listAthletes = await _athleteRepository.GetListOfAthletes();
@@ -139,7 +139,7 @@ namespace backEnd_EM.Controllers
         }
 
         //player to update there own profile 
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateAthleteRequestDTO updateAthlete)
         {
@@ -155,7 +155,7 @@ namespace backEnd_EM.Controllers
         //For Cam and them to delete player
         //need to figure out how to cascade delete 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("{id}"), Authorize]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var athleteModel = await _athleteRepository.DeleteAthlete(id);
@@ -217,7 +217,7 @@ namespace backEnd_EM.Controllers
         }
 
         [HttpPost]
-        [Route("updatePasswords/{id}")]
+        [Route("updatePasswords/{id}"), Authorize]
         public async Task<IActionResult> UpdatePassword([FromRoute] int id, [FromBody] UpdatePasswordDto updatePasswordModle)
         {
             var UpdatePasswordResponce = await _athleteRepository.UpdatePassword(id, updatePasswordModle);

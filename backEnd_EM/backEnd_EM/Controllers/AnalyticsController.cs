@@ -5,6 +5,7 @@ using backEnd_EM.Models;
 using backEnd_EM.Mapper;
 using backEnd_EM.Dtos.Analyse;
 using backEnd_EM.Dtos.Analytics;
+using Microsoft.AspNetCore.Authorization;
 namespace backEnd_EM.Controllers
 
 {
@@ -26,7 +27,7 @@ namespace backEnd_EM.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllAnalytics")]
+        [Route("GetAllAnalytics"), Authorize]
         public async Task<IActionResult> GetAllAnalytics()
         {
             var Analytics = await _analyticsRepo.AllAnalyticsSorted();
@@ -39,7 +40,7 @@ namespace backEnd_EM.Controllers
 
         //Will be tested but implemented when Athlete is created
         [HttpPost]
-        [Route("CreateAnalytis")]
+        [Route("CreateAnalytis"), Authorize]
         public async Task<IActionResult> CreateAnalytis([FromBody] CreateRequestAnalyticsDto analyticsDto)
         {
             var analyticModel = analyticsDto.CreateRequest();
@@ -53,7 +54,7 @@ namespace backEnd_EM.Controllers
         }
 
         [HttpGet]
-        [Route("GetAnalytisById/{id}")]
+        [Route("GetAnalytisById/{id}"), Authorize]
         public async Task<IActionResult> GetAnalytisById([FromRoute] int id)
         {
             var analytic = await _analyticsRepo.GetAnalyticsByAthleteId(id);
@@ -64,7 +65,7 @@ namespace backEnd_EM.Controllers
             return Ok(analytic.ToAnalyticsDto());
         }
         [HttpGet]
-        [Route("GetAnalytisByPhone/{phone}")]
+        [Route("GetAnalytisByPhone/{phone}"), Authorize]
         public async Task<IActionResult> GetAnalytisByPhone([FromRoute] long phone)
         {
             var AthletesId = await _athleteRepository.GetAthletesByPhoneForId(phone);
@@ -83,7 +84,7 @@ namespace backEnd_EM.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateRank/{phone}")]
+        [Route("UpdateRank/{phone}"), Authorize]
         public async Task<IActionResult> UpdateRank([FromRoute] long phone, [FromBody] UpdateAnalyticsDto updateDto)
         {
             var AthletesId = await _athleteRepository.GetAthletesByPhoneForId(phone);

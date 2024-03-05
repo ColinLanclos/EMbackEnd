@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using backEnd_EM.Dtos.Athletes;
 using backEnd_EM.Dtos;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace backEnd_EM.Controllers
@@ -25,7 +26,7 @@ namespace backEnd_EM.Controllers
             _athleteRepo = athleteRepo;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<IActionResult> allProgress()
         {
             var Progress = await _progressTrackerRepository.GetAllProgress();
@@ -37,7 +38,7 @@ namespace backEnd_EM.Controllers
             return Ok(Progress);
         }
 
-        [HttpGet("getById/{id}")]
+        [HttpGet("getById/{id}"), Authorize]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var ProgressById = await _progressTrackerRepository.GetProgressByAthleteId(id);
@@ -49,7 +50,7 @@ namespace backEnd_EM.Controllers
             return Ok(ProgressById);
         }
 
-        [HttpDelete("deleteProgress/{phone}/{workOut}/{date}")]
+        [HttpDelete("deleteProgress/{phone}/{workOut}/{date}"), Authorize]
         public async Task<IActionResult> deleteProgress([FromRoute] long phone, [FromRoute] string workOut, [FromRoute] string date)
         {
             var AthletesId = await _athleteRepo.GetAthletesByPhoneForId(phone);
@@ -68,7 +69,7 @@ namespace backEnd_EM.Controllers
             return Ok(progressModel);
         }
 
-        [HttpPost("addProgress/{phone}")]
+        [HttpPost("addProgress/{phone}"), Authorize]
         public async Task<IActionResult> addProgress([FromRoute] long phone, [FromBody] CreateProgressDto progressModel)
         {
             var AthletesId = await _athleteRepo.GetAthletesByPhoneForId(phone);
@@ -89,7 +90,7 @@ namespace backEnd_EM.Controllers
             return Ok(Model);
         }
 
-        [HttpPut("updateTracker/{phone}/{date}/{workOut}")]
+        [HttpPut("updateTracker/{phone}/{date}/{workOut}"), Authorize]
         public async Task<IActionResult> UpdateProgresTracker([FromRoute] long phone, [FromRoute] string date, [FromRoute] string workOut, [FromBody] UpdateProgressTrackerDto progressTrackerModel)
         {
             var AthletesId = await _athleteRepo.GetAthletesByPhoneForId(phone);
